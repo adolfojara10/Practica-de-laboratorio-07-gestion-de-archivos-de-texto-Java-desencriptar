@@ -71,9 +71,11 @@ Se nos activa el botón de Buscar y la ruta se nos escribe en el área de texto.
 
 ## RESULTADO(S) OBTENIDO(S):
 
-•	Para la primera parte de esta práctica, se logró crear un método propio de encriptación, el cual es el abecedario al revés y para los números, son caracteres especiales.
-•	Se logro un correcto manejo y uso de la clase FileWriter y buferedWriter ya que estas fueron implementadas para la encriptación del texto escrito por un usuario.
-•	Autoaprendizaje del “jFileChooser” para escoger archivos mucho más rápido y cómodo para el usuario, para no tener que escribir la ruta. 
+*	Para la primera parte de esta práctica, se logró crear un método propio de encriptación, el cual es el abecedario al revés y para los números, son caracteres especiales.
+
+*	Se logro un correcto manejo y uso de la clase FileWriter y buferedWriter ya que estas fueron implementadas para la encriptación del texto escrito por un usuario.
+
+*	Autoaprendizaje del “jFileChooser” para escoger archivos mucho más rápido y cómodo para el usuario, para no tener que escribir la ruta. 
 
 ## CONCLUSIONES:
 
