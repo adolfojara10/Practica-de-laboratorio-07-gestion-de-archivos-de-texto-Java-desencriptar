@@ -14,6 +14,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
+import javax.swing.JOptionPane;
 
 /**
  *@author  JHON FAREZ
@@ -165,6 +166,16 @@ public class ControladorTexto {
     
     public void desencriptar(String rutaAbsoluta, String texto) {
 
+        String desencriptacion = "";
+        try {
+            for (int i = 0; i < texto.length(); i++) {
+                char letra = texto.charAt(i);
+                String aux = String.valueOf(letra);
+                
+            }
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null,"Algo salio mal vuelva a interntarlo");
+        }
     }
 
     
