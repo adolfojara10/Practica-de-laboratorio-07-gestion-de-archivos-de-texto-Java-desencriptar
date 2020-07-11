@@ -66,7 +66,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         jScrollPane1.setViewportView(jTextArea1);
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setTitle("Crear Archivo Encriptado");
+        setTitle("Desencriptar Archivo");
 
         jLabel1.setText("Ruta");
 
