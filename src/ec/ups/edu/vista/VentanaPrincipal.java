@@ -5,17 +5,28 @@
  */
 package ec.ups.edu.vista;
 
+import ec.ups.edu.controlador.ControladorTexto;
+import java.io.File;
+import javax.swing.JFileChooser;
+import javax.swing.JOptionPane;
+import javax.swing.filechooser.FileNameExtensionFilter;
+
 /**
  *
  * @author Adolfo
  */
 public class VentanaPrincipal extends javax.swing.JFrame {
 
+    String name;
+    private ControladorTexto controladorTexto;
+
     /**
      * Creates new form VentanaPrincipal
      */
     public VentanaPrincipal() {
         initComponents();
+        name = null;
+        controladorTexto = new ControladorTexto();
     }
 
     /**
@@ -27,21 +38,197 @@ public class VentanaPrincipal extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jButton1 = new javax.swing.JButton();
+        txtRuta = new javax.swing.JLabel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        txtAreaTexto = new javax.swing.JTextArea();
+        textRuta = new javax.swing.JTextField();
+        btnBuscar = new javax.swing.JButton();
+        btnCrear = new javax.swing.JButton();
+        btnLimpiar = new javax.swing.JButton();
+
+        jButton1.setText("jButton1");
+
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+
+        txtRuta.setText("Ruta");
+
+        txtAreaTexto.setColumns(20);
+        txtAreaTexto.setRows(5);
+        jScrollPane1.setViewportView(txtAreaTexto);
+
+        btnBuscar.setText("Buscar");
+        btnBuscar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnBuscarActionPerformed(evt);
+            }
+        });
+
+        btnCrear.setBackground(new java.awt.Color(102, 102, 255));
+        btnCrear.setText("Crear Archivo");
+
+        btnLimpiar.setBackground(new java.awt.Color(255, 0, 0));
+        btnLimpiar.setText("Limpiar");
+        btnLimpiar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnLimpiarActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(17, 17, 17)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(txtRuta, javax.swing.GroupLayout.PREFERRED_SIZE, 59, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addComponent(textRuta, javax.swing.GroupLayout.PREFERRED_SIZE, 184, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(btnBuscar)
+                                .addGap(2, 2, 2))
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 344, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(74, 74, 74)
+                        .addComponent(btnCrear)
+                        .addGap(89, 89, 89)
+                        .addComponent(btnLimpiar)))
+                .addContainerGap(64, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(btnBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(16, 16, 16)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(txtRuta)
+                            .addComponent(textRuta, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(22, 22, 22)))
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 215, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnCrear)
+                    .addComponent(btnLimpiar))
+                .addContainerGap(24, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void btnLimpiarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLimpiarActionPerformed
+        limpiar();
+    }//GEN-LAST:event_btnLimpiarActionPerformed
+
+    private void btnBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarActionPerformed
+        JFileChooser menu = new JFileChooser();
+
+        FileNameExtensionFilter filtro = new FileNameExtensionFilter("*.TXT", "txt");
+
+        menu.setFileFilter(filtro);
+
+        menu.setFileSelectionMode(JFileChooser.FILES_AND_DIRECTORIES);
+
+        int seleccionar = menu.showOpenDialog(this);
+
+        if (seleccionar == JFileChooser.APPROVE_OPTION) {
+
+            File fichero = menu.getSelectedFile();
+            txtRuta.setText(fichero.getAbsolutePath());
+
+            btnCrear.setEnabled(true);
+
+        }
+
+    }
+
+    /**
+     * El metodo btnCrearActionPerformed nos crea un nuevo archivo y ase uso de
+     * varios metodo de la clase controladorTeto ya instanciada anteriormente
+     *
+     * @param evt
+     */
+    private void btnCrearActionPerformed(java.awt.event.ActionEvent evt) {
+        // TODO add your handling code here:
+
+        String nombre = txtRuta.getText();
+
+        if (!nombre.contains(".")) {
+            do {
+                name = JOptionPane.showInputDialog(this, "Escriba el nombre del archivo: ");
+
+                
+            } while (name == null || controladorTexto.comprobar(txtRuta.getText(), name));
+
+            if (controladorTexto.comprobarRuta(txtRuta.getText())) {
+                String path = controladorTexto.crearFichero(txtRuta.getText(), name);
+                controladorTexto.encriptar(path, txtAreaTexto.getText());
+                JOptionPane.showMessageDialog(this, "Fichero creado y encriptado con exito");
+                limpiar();
+
+            } else {
+                JOptionPane.showMessageDialog(this, "Ruta incorrecta intentelo de nuevo");
+            }
+        } else {
+            if (controladorTexto.comprobarRuta(txtRuta.getText())) {
+                String path = txtRuta.getText();
+                controladorTexto.encriptar(path, txtAreaTexto.getText());
+                JOptionPane.showMessageDialog(this, "Fichero creado y encriptado con exito");
+                limpiar();
+            } else {
+                JOptionPane.showMessageDialog(this, "Ruta incorrecta intentelo de nuevo");
+            }
+        }
+    }
+
+    /**
+     * @param args los argumentos de la línea de comando
+     */
+    public static void main(String args[]) {
+        /* Set the Nimbus look and feel */
+        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
+        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
+         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
+         */
+        try {
+            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
+                if ("Nimbus".equals(info.getName())) {
+                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
+                    break;
+                }
+            }
+        } catch (ClassNotFoundException ex) {
+            java.util.logging.Logger.getLogger(VentanaPrincipal.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (InstantiationException ex) {
+            java.util.logging.Logger.getLogger(VentanaPrincipal.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (IllegalAccessException ex) {
+            java.util.logging.Logger.getLogger(VentanaPrincipal.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
+            java.util.logging.Logger.getLogger(VentanaPrincipal.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        }
+        //</editor-fold>
+
+        /* Create and display the form */
+        java.awt.EventQueue.invokeLater(new Runnable() {
+            public void run() {
+                new VentanaPrincipal().setVisible(true);
+            }
+        });
+    }//GEN-LAST:event_btnBuscarActionPerformed
+    public void limpiar() {
+        txtAreaTexto.setText("");
+        txtRuta.setText("");
+        btnCrear.setEnabled(false);
+
+    }
 
     /**
      * @param args the command line arguments
@@ -79,5 +266,13 @@ public class VentanaPrincipal extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnBuscar;
+    private javax.swing.JButton btnCrear;
+    private javax.swing.JButton btnLimpiar;
+    private javax.swing.JButton jButton1;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JTextField textRuta;
+    private javax.swing.JTextArea txtAreaTexto;
+    private javax.swing.JLabel txtRuta;
     // End of variables declaration//GEN-END:variables
 }
