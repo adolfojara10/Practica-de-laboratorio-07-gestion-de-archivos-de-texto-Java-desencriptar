@@ -15,8 +15,17 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
- * @author JHON FAREZ
+ * Esta clase contiene o almacena las funciones necesarias para el uso de este
+ * programa sea eficaz, asi como los metodos para controlar textos, crear
+ * diccionarios, comprobar rutas, conprobar y el metodo desencriptar, que son
+ * nesesario para que depues el usuario pueda manipular el programa con siertas
+ * restricciones que le ayudaran aque pueda manipular el mismo de una manera
+ * correcta y que sea de su total satisfacccion
+ *
  * @author Adolfo
+ * @version 11.3
+ * @author JHON FAREZ
+ * @version 8.2
  */
 public class ControladorTexto {
 
@@ -29,12 +38,26 @@ public class ControladorTexto {
     private java.util.List<Character> abecedario;
     private Map<Character, Character> diccionario;
 
+    /**
+     * Metodo constructor controladorTexto hace la instancia de el abecedario,
+     * diccionario y otro para crear un dicionario. este metodo especial de la
+     * clase es invocada siempre que se crea un objeto de esta clase
+     *
+     */
     public ControladorTexto() {
         abecedario = new ArrayList<>();
         diccionario = new HashMap<>();
         diccionario = crearDiccionario();
     }
 
+    /**
+     * El metodo crear diccionarios no resive ningun tipo de parametro por ello
+     * declaramos nuevas variables de tipo String eh int, dentro de bucles hace
+     * que el metodo put almacena el valor especificado y lo asocia ala clave
+     * especificada en este mapa
+     *
+     * @return diccionario
+     */
     public Map<Character, Character> crearDiccionario() {
         //Declaracion de nuevas varibles
         String abe = "abcdefghijklmnñopqrstuvwxyz";
@@ -64,6 +87,15 @@ public class ControladorTexto {
         return diccionario;
     }
 
+    /**
+     * Este metodo resibe como parametro un dato de tipo String ruta, y
+     * comprueba que la ruta ingresada sea correcta y exista en el comutador
+     * huesped
+     *
+     * @param ruta de tipo String ara que compruebe la existencia de la ruta
+     * @return Boolean si la ruta existe nos retornara un true y caso contrario
+     * false
+     */
     public boolean comprobarRuta(String ruta) {
         fichero = new File(ruta);
 
@@ -74,6 +106,18 @@ public class ControladorTexto {
         }
     }
 
+    /**
+     * Este metodo es el encargado de desencriptar un archivo .txt. Para eso,
+     * primero lee el archivo y lo guarda en el String texto. luego ese String
+     * encriptado, procede a ser desencriptado, para lo cual compara los values
+     * del mapa diccionario con los valores del String texto. Y luego pongo los
+     * keys del mapa en el String desencriptar. Por ultimo devolvemos el String
+     * desencriptar.
+     *
+     * @param rutaAbsoluta el cual es la ruta del archivo a desencriptar
+     * @return String que ya esta desencriptado y listo para poder leer
+     * @throws IOException
+     */
     public String desencriptar(String rutaAbsoluta) throws IOException {
         String texto = "";
         try {
