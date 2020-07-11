@@ -36,6 +36,11 @@ public class VentanaPrincipal extends javax.swing.JFrame {
     //la asscesibilidad del atributo de la clase  es de tipo  privado
     private ControladorTexto controladorTexto;
 
+    /**
+     * Es el metodo constructor de la Ventana Principal, en este se inicializa
+     * la ventana, y ademas el controlador
+     *
+     */
     public VentanaPrincipal() {
         initComponents();
 
@@ -147,12 +152,25 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    /**
+     * Metodo para el boton de limpiar. Es el encargado de limpiar las cajas de
+     * texto y de poner invisble al boton de buscar
+     *
+     * @param evt
+     */
     private void btnLimpiarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLimpiarActionPerformed
         // TODO add your handling code here:
         limpiar();
 
     }//GEN-LAST:event_btnLimpiarActionPerformed
 
+    /**
+     * El metodo btnBuscarActionPerformed se encarga de buscar d la rutaa
+     * ingresada en el computador huesped para poder explorar dedentro de si
+     * segun los datos ingresados
+     *
+     * @param evt
+     */
     private void btnBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarActionPerformed
 
         JFileChooser menu = new JFileChooser();
@@ -174,6 +192,13 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_btnBuscarActionPerformed
 
+    /**
+     * Metodo encargado de desencriptar un archivo .txt. Además, comprueba si es
+     * un directori o no pero tambien muestra mensajes en caso de que pase lo
+     * anteriormente mencionado
+     *
+     * @param evt
+     */
     private void btnDesencriptarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDesencriptarActionPerformed
         // TODO add your handling code here:
         String ruta = txtRuta.getText();
@@ -195,6 +220,13 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_btnDesencriptarActionPerformed
 
+    /**
+     * Este metodo es solo en el caso de que el usuario ecscriba la ruta,
+     * entonces activamos el boton de buscar para proceder a desencriptar el
+     * texto.
+     *
+     * @param evt
+     */
     private void txtRutaKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtRutaKeyTyped
         // TODO add your handling code here:
         btnDesencriptar.setEnabled(true);
@@ -236,6 +268,10 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         });
     }
 
+    /**
+     * Metodo encargado de limpiar las cajas de texto y ademas de desvanecer el
+     * boton de buscar
+     */
     public void limpiar() {
         txtAreaTexto.setText("");
         txtRuta.setText("");
