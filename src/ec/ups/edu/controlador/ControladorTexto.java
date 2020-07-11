@@ -163,58 +163,8 @@ public class ControladorTexto {
      * escritura
      */
     
-    public void encriptar(String rutaAbsoluta, String texto) {
-        //fichero = new File(rutaAbsoluta);
-        //texto = texto.toLowerCase();
-        String aux = "";
+    public void desencriptar(String rutaAbsoluta, String texto) {
 
-        for (int i = 0; i < texto.length(); i++) {
-            char letra = texto.charAt(i);
-            String le = String.valueOf(letra);
-            for (Map.Entry<Character, Character> letra2 : diccionario.entrySet()) {
-                String le2 = String.valueOf(letra2.getKey());
-
-                if (le.equalsIgnoreCase(le2)) {
-                    // si la varibale le asignida el dato de tipo String letra es mayuscula nos devolvera un true
-                    if (Character.isUpperCase(letra)) {
-                        aux = aux.concat(String.valueOf(letra2.getValue()).toUpperCase());
-                        System.out.println(aux);
-                    } else {
-                        aux = aux.concat(String.valueOf(letra2.getValue()));
-                        System.out.println(aux);
-                    }
-                }
-            }
-        }
-
-        try {
-
-            /**
-             * Incializacion del objeto archIvoEscritura con el FileWritter que
-             * nos permite escribir archivos
-             *
-             */
-            FileWriter archivoEscritura = new FileWriter(rutaAbsoluta, false);
-            /**
-             * Incializacion del objeto escritura con el BufferedWriter que es
-             * como un lector temporados que hace que podamos leer de linea en
-             * linea
-             */
-
-            BufferedWriter escritura = new BufferedWriter(archivoEscritura);
-
-            escritura.append(aux);
-
-            escritura.close();
-            archivoEscritura.close();
-
-        } catch (FileNotFoundException ex) {
-            System.out.println("Ruta del archivo no encontrada");
-        } catch (IOException ex2) {
-            System.out.println("Error de escritura");
-        } catch (Exception ex3) {
-            System.out.println("Error General");
-        }
     }
 
     
