@@ -32,26 +32,14 @@ public class ControladorTexto {
     private java.util.List<Character> abecedario;
     private Map<Character, Character> diccionario;
 
-    /**
-     * Metodo constructor  controladorTexto hace la instancia de el
-     * abecedario, diccionario y otro para crear un dicionario. este metodo
-     * especial de la clase es invocada siempre que se crea un objeto de esta
-     * clase
-     */
+    
     public ControladorTexto() {
         abecedario = new ArrayList<>();
         diccionario = new HashMap<>();
         diccionario = crearDiccionario();
     }
 
-    /**
-     * El metodo crear diccionarios no resive ningun tipo de parametro por ello
-     * declaramos nuevas variables de tipo String eh int, dentro de bucles hace
-     * que el metodo put almacena el valor especificado y lo asocia ala clave
-     * especificada en este mapa
-     *
-     * @return diccionario 
-     */
+   
     public Map<Character, Character> crearDiccionario() {
         //Declaracion de nuevas varibles
         String abe = "abcdefghijklmnñopqrstuvwxyz";
@@ -66,10 +54,7 @@ public class ControladorTexto {
         }
 
         diccionario.put(espacio.charAt(0), caritas.charAt(10));
-        /**
-         * Almacenamiento de el valor en la posision especifiacada y la
-         * asosiacion con la clave especificada en el map
-         */
+        
         diccionario.put(num.charAt(0), caritas.charAt(0));
         diccionario.put(num.charAt(1), caritas.charAt(1));
         diccionario.put(num.charAt(2), caritas.charAt(2));
@@ -84,15 +69,7 @@ public class ControladorTexto {
         return diccionario;
     }
 
-    /**
-     * Este metodo resibe como parametro un dato de tipo String ruta, y
-     * comprueba que la ruta ingresada sea correcta y exista en el comutador
-     * huesped
-     *
-     * @param ruta de tipo String ara que compruebe la existencia de la ruta
-     * @return Boolean si la ruta existe nos retornara un true y caso contrario
-     * false
-     */
+    
     public boolean comprobarRuta(String ruta) {
         fichero = new File(ruta);
 
@@ -103,17 +80,7 @@ public class ControladorTexto {
         }
     }
 
-    /**
-     * El metodo concatena el nombre con el "txt", o "TXT" y comprueba que el fichero
-     * despues de instanciarla exista en la ruta y el separator representa el
-     * separador de directorios dependiendo el sistema operativo en el que
-     * estemos trabajando
-     *
-     * @param ruta Es de tipo String y hace que compruebe si el fichero
-     * instanceado.
-     * @param nombre de tipo String y con esos datos podemos darle un formato
-     * @return Boolean true o false si el fichero existe dentro del la ruta
-     */
+   
     public boolean comprobar(String ruta, String nombre) {
         nombre = nombre.concat(".txt");
         fichero = new File(ruta + File.separator + nombre);
@@ -125,18 +92,7 @@ public class ControladorTexto {
         }
     }
 
-    /**
-     * El metodo crear fichero, estamos creando ficheros gracias al metodo
-     * createNewFile y ademas de eso el metodo crearFichero controla las
-     * exepciones lanzando y capturando con el try and catch
-     *
-     * @param ruta En este parametro de entrada nos da de tipo String una
-     * direccion para poder crear un nuevo dichero
-     * @param nombre el nombre que se va asignar al nuevo fuchero ingresado para
-     * desepues ser manipulado
-     * @return Retorna un tipo de dato String que es la ruta absoluta de un
-     * arhivo o directorio
-     */
+   
     public String crearFichero(String ruta, String nombre) {
 
         nombre = nombre.concat(".txt");
@@ -151,18 +107,7 @@ public class ControladorTexto {
         return fichero.getAbsolutePath();
     }
 
-    /**
-     * El metodo encripar tieneuna variable vacia auxiliar que nos ayudara para
-     * que los con cindiciales planteados podamos asignar a nuevos datos de tipo
-     * String y en si este metodo hace la encriptacion del codigo y con la ayuda
-     * de la clase File que se estan usando los mtodos para leer y esribir
-     * archivos
-     *
-     * @param rutaAbsoluta Dato de tipo String
-     * @param texto Dato de tipo String
-     * @throws Error de archivos no encontrados, error general y el error de
-     * escritura
-     */
+    
     
     public void desencriptar(String rutaAbsoluta, String texto) {
 
