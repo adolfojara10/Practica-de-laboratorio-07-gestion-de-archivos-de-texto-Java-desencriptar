@@ -7,20 +7,24 @@ package ec.ups.edu.vista;
 
 import ec.ups.edu.controlador.ControladorTexto;
 import java.io.*;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.*;
 import javax.swing.JOptionPane;
 import javax.swing.filechooser.FileNameExtensionFilter;
 
 /**
- *Esta clase se encargara de GUI(La interfaz grafica con el usuario) de manera que 
- * el usuario tendra opciones para poder  ingresar, para ello la caracteristicas principal esque 
- * la clase es dinamica ya que funcionara con caulquier ruta ingresada por el usuario,
- *  ademas esta clase esta con siertas restricciones que el usuario deberea seguir para que la ejecicion
- * del programa sea eficaz y satisfactorio para el mismo, ya puede resolver dudas 
- * que el usuario tenga en un momento de que el programa no funcione como el piensa habra 
- * mensajes emergentes que sera notificados con el JOPtionPane para que el usuario pueda ver que esta 
- * fallando y pueda corregirlo para poder avanzar con el ejecucion del programa
- * 
+ * Esta clase se encargara de GUI(La interfaz grafica con el usuario) de manera
+ * que el usuario tendra opciones para poder ingresar, para ello la
+ * caracteristicas principal esque la clase es dinamica ya que funcionara con
+ * caulquier ruta ingresada por el usuario, ademas esta clase esta con siertas
+ * restricciones que el usuario deberea seguir para que la ejecicion del
+ * programa sea eficaz y satisfactorio para el mismo, ya puede resolver dudas
+ * que el usuario tenga en un momento de que el programa no funcione como el
+ * piensa habra mensajes emergentes que sera notificados con el JOPtionPane para
+ * que el usuario pueda ver que esta fallando y pueda corregirlo para poder
+ * avanzar con el ejecucion del programa
+ *
  * @author Adolfo
  * @version 11.3
  * @author JHON FAREZ
@@ -28,20 +32,16 @@ import javax.swing.filechooser.FileNameExtensionFilter;
  */
 public class VentanaPrincipal extends javax.swing.JFrame {
 
-    //Creacion de una variable de tipo String 
-    String name;
     //llamar ala clase controladoreTexto para poder acceder alos metodos 
     //la asscesibilidad del atributo de la clase  es de tipo  privado
     private ControladorTexto controladorTexto;
 
-    
     public VentanaPrincipal() {
         initComponents();
-        name = null;
+
         controladorTexto = new ControladorTexto();
     }
 
-    
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -53,8 +53,8 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         btnBuscar = new javax.swing.JButton();
         jScrollPane2 = new javax.swing.JScrollPane();
         txtAreaTexto = new javax.swing.JTextArea();
-        btnCrear = new javax.swing.JButton();
         btnLimpiar = new javax.swing.JButton();
+        btnDesencriptar = new javax.swing.JButton();
 
         jTextArea1.setColumns(20);
         jTextArea1.setRows(5);
@@ -65,6 +65,12 @@ public class VentanaPrincipal extends javax.swing.JFrame {
 
         jLabel1.setText("Ruta");
 
+        txtRuta.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtRutaKeyTyped(evt);
+            }
+        });
+
         btnBuscar.setBackground(new java.awt.Color(153, 153, 255));
         btnBuscar.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
         btnBuscar.setText(". . .");
@@ -74,18 +80,11 @@ public class VentanaPrincipal extends javax.swing.JFrame {
             }
         });
 
+        txtAreaTexto.setEditable(false);
+        txtAreaTexto.setBackground(new java.awt.Color(102, 102, 102));
         txtAreaTexto.setColumns(20);
         txtAreaTexto.setRows(5);
         jScrollPane2.setViewportView(txtAreaTexto);
-
-        btnCrear.setBackground(new java.awt.Color(102, 102, 255));
-        btnCrear.setText("Crear Archivo");
-        btnCrear.setEnabled(false);
-        btnCrear.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnCrearActionPerformed(evt);
-            }
-        });
 
         btnLimpiar.setBackground(new java.awt.Color(255, 0, 0));
         btnLimpiar.setText("Limpiar");
@@ -95,17 +94,21 @@ public class VentanaPrincipal extends javax.swing.JFrame {
             }
         });
 
+        btnDesencriptar.setBackground(new java.awt.Color(102, 102, 255));
+        btnDesencriptar.setText("Buscar");
+        btnDesencriptar.setEnabled(false);
+        btnDesencriptar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnDesencriptarActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(129, 129, 129)
-                        .addComponent(btnCrear)
-                        .addGap(78, 78, 78)
-                        .addComponent(btnLimpiar))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(55, 55, 55)
                         .addComponent(jLabel1)
@@ -117,6 +120,12 @@ public class VentanaPrincipal extends javax.swing.JFrame {
                         .addGap(67, 67, 67)
                         .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 394, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(64, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(btnDesencriptar)
+                .addGap(86, 86, 86)
+                .addComponent(btnLimpiar)
+                .addGap(158, 158, 158))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -128,11 +137,11 @@ public class VentanaPrincipal extends javax.swing.JFrame {
                     .addComponent(btnBuscar))
                 .addGap(30, 30, 30)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 252, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(30, 30, 30)
+                .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnCrear)
-                    .addComponent(btnLimpiar))
-                .addContainerGap(24, Short.MAX_VALUE))
+                    .addComponent(btnLimpiar)
+                    .addComponent(btnDesencriptar))
+                .addContainerGap(36, Short.MAX_VALUE))
         );
 
         pack();
@@ -147,59 +156,49 @@ public class VentanaPrincipal extends javax.swing.JFrame {
     private void btnBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarActionPerformed
 
         JFileChooser menu = new JFileChooser();
-        
-        FileNameExtensionFilter filtro = new FileNameExtensionFilter("*.TXT", "txt" );
-        
+
+        FileNameExtensionFilter filtro = new FileNameExtensionFilter("*.TXT", "txt");
+
         menu.setFileFilter(filtro);
-        
-        menu.setFileSelectionMode(JFileChooser.FILES_AND_DIRECTORIES);
-        
+
+        menu.setFileSelectionMode(JFileChooser.FILES_ONLY);
+
         int seleccionar = menu.showOpenDialog(this);
 
         if (seleccionar == JFileChooser.APPROVE_OPTION) {
 
             File fichero = menu.getSelectedFile();
             txtRuta.setText(fichero.getAbsolutePath());
-
-            btnCrear.setEnabled(true);
-                       
+            btnDesencriptar.setEnabled(true);
 
         }
-
-
     }//GEN-LAST:event_btnBuscarActionPerformed
 
-    private void btnCrearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCrearActionPerformed
+    private void btnDesencriptarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDesencriptarActionPerformed
         // TODO add your handling code here:
-
-        String nombre = txtRuta.getText();
-
-        if (!nombre.contains(".")) {
-            do {
-                name = JOptionPane.showInputDialog(this, "Escriba el nombre del archivo: ");
-
-            } while (name == null || controladorTexto.comprobar(txtRuta.getText(), name));
-
-            if (controladorTexto.comprobarRuta(txtRuta.getText())) {
-                String path = controladorTexto.crearFichero(txtRuta.getText(), name);
-                controladorTexto.desencriptar(path, txtAreaTexto.getText());
-                JOptionPane.showMessageDialog(this, "Fichero creado y encriptado con exito");
-                limpiar();
-
-            } else {
-                JOptionPane.showMessageDialog(this, "Ruta incorrecta intentelo de nuevo");
-            }
+        String ruta = txtRuta.getText();
+        if (ruta == null) {
+            JOptionPane.showMessageDialog(this, "Escriba o seleccione la ruta");
         } else {
-            if (controladorTexto.comprobarRuta(txtRuta.getText())) {
-                String path = txtRuta.getText();
-                controladorTexto.desencriptar(path, txtAreaTexto.getText());
-                JOptionPane.showMessageDialog(this, "Fichero creado y encriptado con exito");
-                limpiar();
+            if (controladorTexto.comprobarRuta(ruta)) {
+                try {
+                    String text = controladorTexto.desencriptar(ruta);
+                    txtAreaTexto.setText(text);
+                    btnDesencriptar.setEnabled(false);
+                } catch (IOException ex) {
+                    Logger.getLogger(VentanaPrincipal.class.getName()).log(Level.SEVERE, null, ex);
+                }
             } else {
-                JOptionPane.showMessageDialog(this, "Ruta incorrecta intentelo de nuevo");
+                JOptionPane.showMessageDialog(this, "La ruta no existe o es una carpeta");
+                limpiar();
             }
         }
-    }//GEN-LAST:event_btnCrearActionPerformed
+    }//GEN-LAST:event_btnDesencriptarActionPerformed
+
+    private void txtRutaKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtRutaKeyTyped
+        // TODO add your handling code here:
+        btnDesencriptar.setEnabled(true);
+    }//GEN-LAST:event_txtRutaKeyTyped
 
     /**
      * @param args los argumentos de la línea de comando
@@ -240,13 +239,13 @@ public class VentanaPrincipal extends javax.swing.JFrame {
     public void limpiar() {
         txtAreaTexto.setText("");
         txtRuta.setText("");
-        btnCrear.setEnabled(false);
+        btnDesencriptar.setEnabled(false);
 
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnBuscar;
-    private javax.swing.JButton btnCrear;
+    private javax.swing.JButton btnDesencriptar;
     private javax.swing.JButton btnLimpiar;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane1;

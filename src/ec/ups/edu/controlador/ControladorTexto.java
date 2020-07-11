@@ -6,9 +6,12 @@
 package ec.ups.edu.controlador;
 
 import java.awt.List;
+import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.FileNotFoundException;
+import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -17,12 +20,11 @@ import java.util.Map;
 import javax.swing.JOptionPane;
 
 /**
- *@author  JHON FAREZ
+ * @author JHON FAREZ
  * @author Adolfo
  */
 public class ControladorTexto {
-    
-   
+
     /**
      * Declaracion de atributos que seran usados en los metodos Atributos de
      * diferentes datos;
@@ -32,19 +34,17 @@ public class ControladorTexto {
     private java.util.List<Character> abecedario;
     private Map<Character, Character> diccionario;
 
-    
     public ControladorTexto() {
         abecedario = new ArrayList<>();
         diccionario = new HashMap<>();
         diccionario = crearDiccionario();
     }
 
-   
     public Map<Character, Character> crearDiccionario() {
         //Declaracion de nuevas varibles
         String abe = "abcdefghijklmnñopqrstuvwxyz";
         String num = "0123456789";
-        String caritas = "☺☻♥♦♣♠•◘○◙♀"; 
+        String caritas = "☺☻♥♦♣♠•◘○◙♀";
         String espacio = " ";
         int aux = (abe.length() - 1);
 
@@ -54,7 +54,7 @@ public class ControladorTexto {
         }
 
         diccionario.put(espacio.charAt(0), caritas.charAt(10));
-        
+
         diccionario.put(num.charAt(0), caritas.charAt(0));
         diccionario.put(num.charAt(1), caritas.charAt(1));
         diccionario.put(num.charAt(2), caritas.charAt(2));
@@ -69,60 +69,59 @@ public class ControladorTexto {
         return diccionario;
     }
 
-    
     public boolean comprobarRuta(String ruta) {
         fichero = new File(ruta);
 
-        if (fichero.exists()) {
+        if (fichero.exists() && fichero.isFile()) {
             return true;
         } else {
             return false;
         }
     }
 
-   
-    public boolean comprobar(String ruta, String nombre) {
-        nombre = nombre.concat(".txt");
-        fichero = new File(ruta + File.separator + nombre);
-
-        if (fichero.exists()) {
-            return true;
-        } else {
-            return false;
-        }
-    }
-
-   
-    public String crearFichero(String ruta, String nombre) {
-
-        nombre = nombre.concat(".txt");
-        fichero = new File(ruta + File.separator + nombre);
-
+    public String desencriptar(String rutaAbsoluta) throws IOException {
+        String texto = "";
         try {
-            fichero.createNewFile();
-        } catch (IOException ex) {
-            ex.printStackTrace();
-        }
 
-        return fichero.getAbsolutePath();
-    }
+            FileReader ficheroOrigen = new FileReader(rutaAbsoluta);
+            BufferedReader archivoLectura = new BufferedReader(ficheroOrigen);
 
-    
-    
-    public void desencriptar(String rutaAbsoluta, String texto) {
+            int valor = archivoLectura.read();
 
-        String desencriptacion = "";
-        try {
-            for (int i = 0; i < texto.length(); i++) {
-                char letra = texto.charAt(i);
-                String aux = String.valueOf(letra);
-                
+            while (valor != -1) {
+                char aux = (char) valor;
+                texto = texto.concat(Character.toString(aux));
+                valor = archivoLectura.read();
             }
-        } catch (Exception e) {
-            JOptionPane.showMessageDialog(null,"Algo salio mal vuelva a interntarlo");
+
+            archivoLectura.close();
+
+        } catch (FileNotFoundException ex2) {
+            System.out.println("File noencontrado");
         }
+
+        String desencriptar = "";
+
+        for (int i = 0; i < texto.length(); i++) {
+            char letra = texto.charAt(i);
+            String le = String.valueOf(letra);
+            for (Map.Entry<Character, Character> letra2 : diccionario.entrySet()) {
+                String le2 = String.valueOf(letra2.getValue());
+
+                if (le.equalsIgnoreCase(le2)) {
+                    // si la varibale le asignida el dato de tipo String letra es mayuscula nos devolvera un true
+                    if (Character.isUpperCase(letra)) {
+                        desencriptar = desencriptar.concat(String.valueOf(letra2.getKey()).toUpperCase());
+                        System.out.println(desencriptar);
+                    } else {
+                        desencriptar = desencriptar.concat(String.valueOf(letra2.getKey()));
+                        System.out.println(desencriptar);
+                    }
+                }
+            }
+        }
+
+        return desencriptar;
     }
 
-    
-    
 }
